@@ -7,5 +7,7 @@ COPY . .
 RUN npm run build
 
 FROM nginx
+#Open port 80 in ELB
+EXPOSE 80
 #From the stage above, copy the build folder into nginx
 COPY --from=builder /app/build /usr/share/nginx/html
