@@ -11,3 +11,17 @@ before-install:
 #Commands to run on the built container
 script:
   - docker run -e CI=true spsmith86/docker-react npm run test
+
+#Deploy to AWS
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-881509186982"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  #Get keys from Travis CI environment variables
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
